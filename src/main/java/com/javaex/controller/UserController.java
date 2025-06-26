@@ -34,6 +34,7 @@ public class UserController {
 		System.out.println("UserController.join");// ㅇㅋ
 		
 		userService.exeUserAdd(userVO);
+		//no값은 db에서 가져올때는 찍히지만, 등록할때는 원래 0이 나오고, 워크벤치에서 no 값을 확인해야함.
 		
 		return "user/joinOk";
 	}
