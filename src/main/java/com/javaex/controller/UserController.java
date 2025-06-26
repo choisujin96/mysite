@@ -29,8 +29,8 @@ public class UserController {
 	
 	
 	//-회원가입
-	@RequestMapping(value="/user/join", method= {RequestMethod.GET, RequestMethod.POST})
-	public String join(@ModelAttribute UserVO userVO) {
+	@RequestMapping(value="/user/joinOk", method= {RequestMethod.GET, RequestMethod.POST})
+	public String joinOk(@ModelAttribute UserVO userVO) {
 		System.out.println("UserController.join");// ㅇㅋ
 		
 		userService.exeUserAdd(userVO);
