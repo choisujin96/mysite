@@ -25,9 +25,22 @@ public class UserService {
 		int count = userRepository.userInsert(userVO);
 		
 		return count;
+
+	}
+	
+	
+	//-로그인
+	public UserVO exeLogin(UserVO userVO) {
 		
+		System.out.println("UserService.exeLogin");//ㅇㅋ
 		
+		UserVO authUSer = userRepository.userSelectOneByIdPw(userVO);
+		
+		return authUSer;
 		
 	}
-
+	
+	
+	
+	
 }

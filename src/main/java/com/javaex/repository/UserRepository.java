@@ -17,12 +17,23 @@ public class UserRepository {
 		
 		System.out.println("UserRepository.userInsert");//ㅇㅋ
 		
-		int count = sqlSession.insert("mysite.insert", userVO);
+		int count = sqlSession.insert("user.insert", userVO);
 		
 		return count;
 		
 		
 	}
 	
+	 public UserVO userSelectOneByIdPw(UserVO userVO) {
+		 
+		 System.out.println("UserRepository.userSelectOneByIdPw");//ㅇㅋ
+		 //System.out.println(userVO); //id pw (0x999)
+		 
+		 UserVO authUser = sqlSession.selectOne("user.SelectOneByIdPw", userVO); 
+		 //System.out.println(authUser); //a의 정보가 들어있다(0x567)
+		 
+		 return authUser;
+	 }
+
 	
 }

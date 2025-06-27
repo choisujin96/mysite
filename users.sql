@@ -7,14 +7,42 @@
 create table users(
 	no       			int 					primary key      auto_increment,
     id	 				varchar(20)		unique       		not null,
-   password 		varchar(20),
+   password 		varchar(20)       not null,
    name 			varchar(20),
-   gender   		varchar(10)
+   gender   		varchar(10)   -- male,female
 );
 
 
-select *
+-- #게스트북 테이블 만들기
+
+create table guestbook(
+	no         int    primary key  auto_increment,
+    name   varchar(80),
+    password  varchar(20),
+    content  text,
+    reg_date  datetime
+);
+
+
+
+
+-- 테이블삭제
+drop table users;
+
+select 	no,
+			id,
+            password,
+            name,
+            gender
 from users;
+
 
 insert into users
 values(null,'aqwqw','111','최','w'); 
+
+select   id,
+            password
+from users
+where id = ''
+and password = ''
+; 
