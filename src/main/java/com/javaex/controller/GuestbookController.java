@@ -25,7 +25,6 @@ public class GuestbookController {
 	//방명록 등록
 	
 	
-	
-	//
+
 	
 }
