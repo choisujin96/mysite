@@ -30,17 +30,29 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.exeList();
 		model.addAttribute("boardList", boardList);
 
-		return "board/list";
+		return "/board/list";
 		
 	} 
 	
-	
-	
+
 	//글쓰기폼
+	@RequestMapping(value="/wform", method= {RequestMethod.GET, RequestMethod.POST})
+	public String writeForm() {
+		System.out.println("BoardController.writeForm");//ㅇㅋ
+		
+		return "/board/writeForm";
+		
+	}
 	
 	//세션에 있는 값을 잘 ㅅㅏ용해라!!
 	//글쓰기(작성자 번호)
-	
+	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
+	public String write() {
+		System.out.println("BoardController.write");
+		boardService.exeBoardAdd();
+		
+		return null;
+	}
 	
 	//수정폼
 	

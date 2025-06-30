@@ -14,7 +14,7 @@ public class BoardRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
+	//--게시판 전체 리스트
 	public List<BoardVO> boardSelect(){
      	
 		System.out.println("BoardRepository.boardSelect");//ㅇㅋ
@@ -23,6 +23,13 @@ public class BoardRepository {
 		
 	
 		return boardList;
+	}
+	
+	
+	public int boardInsert() {
+		
+		System.out.println("BoardRepository.boardInsert");
+		return 0;
 	}
 	
 }
