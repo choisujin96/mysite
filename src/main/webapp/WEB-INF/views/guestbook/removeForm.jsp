@@ -41,7 +41,7 @@
                     </div>
 
 					<div id="guestbook-removeform">
-						<form class="form-box" action="" method="get">
+						<form class="form-box" action="${pageContext.request.contextPath}/guestbook/remove">
 							<table>
 								<colgroup>
 									<col style="width: 10%;">
@@ -54,12 +54,14 @@
 										<th>비밀번호</th>
 										<td>
 											<input type="password" name="password" value="">
+											<input type="text" name="no" value="${param.no}">
 										</td>
 										<td class="text-left">
 											<button class="btn btn-blue btn-input" type="submit">삭제</button>
+											
 										</td>
 										<td class="txt-center">
-											<a id="btn-main" class="btn btn-gray btn-input" href="${pageContext.request.contextPath}/guestbook/">메인으로 돌아가기</a>
+											<a id="btn-main" class="btn btn-gray btn-input" href="${pageContext.request.contextPath}/">메인으로 돌아가기</a>
 										</td>
 									</tr>
 								</tbody>

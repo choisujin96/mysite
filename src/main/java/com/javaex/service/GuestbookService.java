@@ -36,7 +36,17 @@ public class GuestbookService {
 		
 	}
 	
-	
+	//-방명록 삭제하기
+	public int exeGuestbookRemove(GuestbookVO guestbookVO) {
+		System.out.println("GuestbookService.exeGuestbookRemove");
+		
+		
+		int count = guestbookRepository.guestbookDelete(guestbookVO);
+		
+		return 0;
+		
+	}
+		
 	
 	
 	

@@ -93,7 +93,7 @@
 									<td>${guestbookVO.name}</td>
 									<td>${guestbookVO.regDate}</td>
 									<td class="txt-center">
-										<a class="btn btn-gray btn-sm" href="">삭제</a>
+										<a class="btn btn-gray btn-sm" href="${pageContext.request.contextPath}/guestbook/rform?no=${guestbookVO.no}">삭제</a>
 									</td>
 								</tr>
 								<tr>

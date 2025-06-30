@@ -51,9 +51,20 @@ public class GuestbookController {
 
 		System.out.println("GuestbookController/rform");//ㅇㅋ
 		
-		return "";
+		return "guestbook/removeForm";
 	}
 	
+	
+	//방명록 삭제
+	@RequestMapping(value="/guestbook/remove", method= {RequestMethod.GET, RequestMethod.POST})
+	public String remove(@ModelAttribute GuestbookVO guestbookVO) {
+		System.out.println("GuestbookXontroller.remove()");//oㅋ
+
+		System.out.println(guestbookVO);
+		guestbookService.exeGuestbookRemove(guestbookVO);
+		
+		return "redirect:/guestbook/list";
+	}
 	
 	
 }
