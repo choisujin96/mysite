@@ -97,6 +97,14 @@ public class BoardService {
 			
 			
 			//시작 버튼 번호 startPageBtnNo
+		
+			/*
+			 1-> (1, 5)    ===> (5 - 5) + 1  ==> 1
+			 2-> (1, 5)    ===> (5 - 5) + 1  ==> 1
+			 6-> (6, 10)   ===> (10 - 5) + 1  ==> 6
+			 13->(11, 15)  ===> (15 - 5) + 1  ==> 11
+			 13페이지이면       (마지막페이지번호-페이지당버튼갯수)+1
+			 */
 			int startPageBtnNo = (endPageBtnNo - pgaeBtncount)+1;
 		
 			
@@ -104,7 +112,19 @@ public class BoardService {
 		
 			//전체 글 갯수
 			int totalCount = boardRepository.selectTotalCount();
+			
 			//다음 화상표 유무 next
+			/* 총글수와 연관이 있음  , 한페이지당 글갯수
+			 1)
+			 전체글 갯수 51
+			 1  2  3  4  5  > 
+			 한페이지당글갯수(10)*5 <  전체글갯수(51)    --> true
+			 
+			 2)
+			 전체글 갯수 49
+			 1  2  3  4  5  
+			 한페이지당글갯수(10)*5 >  전체글갯수(49)    --> false
+			*/
 			boolean next = false;
 			if(lsitCnt*endPageBtnNo < totalCount) {
 				next=true;
