@@ -24,6 +24,33 @@ public class GuestbookRepository {
 			return guestbookList;
 		}
 
+		
+
+		//전체데이터 가져오기2(페이징)
+		public List<GuestbookVO> guestbookSelect2() {
+			System.out.println("GuestbookRepository.selectList22");		
+			List<GuestbookVO> guestbookList = sqlSession.selectList("guestbook.selectList");
+			
+	
+			return null;
+		}
+
+		
+		
+		
+		//전체 글갯수(페이징)
+		public int selectTotalCount() { //1다오 1쿼리
+			System.out.println("GuestbookRepository.selectTotalCount");
+
+			int totalCount = sqlSession.selectOne("board.selectTotalCount");
+			
+			return totalCount;
+			
+		}
+		
+		
+		
+		
 	
 		//방명록저장
 		public int guestbookInsert(GuestbookVO guestbookVO) {

@@ -20,12 +20,28 @@ public class GuestbookService {
 	public List<GuestbookVO> exeGetguestbookList() {
 		System.out.println("GuestbookService.exeGetguestbookList");//ㅇㅋ
 		List<GuestbookVO> guestbookList = guestbookRepository.guestbookSelect();
-	
-		
 
 		return guestbookList;
 	}
 	
+	
+	
+	//-전체 리스트 가져오기2(페이징)
+	public List<GuestbookVO> exeGetguestbookList2() {
+		System.out.println("GuestbookService.exeGetguestbookList22");//ㅇㅋ
+		guestbookRepository.guestbookSelect2();
+
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
 	//방명록 저장하기
 	public int exeGuestbookAdd(GuestbookVO guestbookVO) {
 		System.out.println("GuestbookService.exeGuestbookAdd");//ㅇㅋ

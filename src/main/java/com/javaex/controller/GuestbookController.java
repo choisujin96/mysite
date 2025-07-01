@@ -32,6 +32,25 @@ public class GuestbookController {
 	}
 
 	
+	
+	//방명록 리스트2(페이징)
+	@RequestMapping(value="/guestbook/list2", method = {RequestMethod.GET, RequestMethod.POST})
+	public String list2() {
+		
+		System.out.println("GuestbookController.list2");//ㅇㅋ
+		guestbookService.exeGetguestbookList2();
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//방명록 등록
 	@RequestMapping(value="/guestbook/add", method= {RequestMethod.GET, RequestMethod.POST})
 	public String add(@ModelAttribute GuestbookVO guestbookVO) {

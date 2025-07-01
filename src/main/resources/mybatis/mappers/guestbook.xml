@@ -21,6 +21,26 @@
 	</select>
 	
 	
+	<!-- 전체글 갯수 구하기(페이징) -->
+	<select id="selectTotalCount" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from guestbook
+		]]>
+	
+	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 방명록 저장하기 -->
 	<insert id="insert" parameterType="com.javaex.vo.GuestbookVO">
     	
