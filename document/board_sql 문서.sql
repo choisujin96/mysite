@@ -19,7 +19,6 @@ create table board(
    content 		text,
    hit 				int,
    reg_date   datetime  		not null,
-
 constraint board_fk foreign key(user_no) 
  references users(no)
 );
@@ -33,6 +32,9 @@ values(null, 5, '첫번째 게시물 제목','첫번재 게시물 내용', 0, no
 insert into board
 values(null, 6, '두번째 게시물 제목','두번재 게시물 내용', 0, now())
 ;
+
+
+
 
 
 
@@ -53,5 +55,8 @@ where u.no = b.user_no
 ;
 
 
+
+select *
+from users;
 
 
