@@ -24,23 +24,16 @@ constraint board_fk foreign key(user_no)
 );
 
 
--- 게시물 등록
-insert into board
-values(null, 5, '첫번째 게시물 제목','첫번재 게시물 내용', 0, now())
-;
-
-insert into board
-values(null, 6, '두번째 게시물 제목','두번재 게시물 내용', 0, now())
-;
-
-
-
-
 
 
 -- 전체 조회
-select *
-from board;
+select count(*)
+from board
+;
+
+
+
+
 
 -- 전체리스트
 select   b.no,
@@ -56,7 +49,23 @@ where u.no = b.user_no
 
 
 
-select *
-from users;
+-- 검색 조회
+select count(*)
+from board
+where title like '%12%'
+;
 
 
+select   b.no,
+			b.title,
+            b.content,
+            b.hit,
+            date_format(b.reg_date, "%Y-%m-%d" ) regDate,
+            u.no userNo,
+            u.name userName
+from users u, board b
+where u.no = b.user_no
+and title like '%12%'
+order by b.no asc
+limit 0, 10
+;

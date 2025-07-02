@@ -57,6 +57,36 @@ public class BoardController {
 	
 	
 	
+	
+	
+	
+	//--게시판 전체 리스트3(검색)
+	@RequestMapping(value="/list3", method= {RequestMethod.GET, RequestMethod.POST})
+	public String list3(@RequestParam(value="crtpage", required = false, defaultValue = "1")int crtPage,
+						@RequestParam(value="kwd", required = false, defaultValue="aaa") String kwd,
+						Model model) {//list2만 했을 경우 에러가 남. 해당 주소를 쳤을 때 게시판 1번째 페이지가 나왔으면 좋겠음.
+		
+		System.out.println("BoardController.list333");
+
+		
+		Map<String, Object> pMap = boardService.exeList3(crtPage, kwd);
+
+		System.out.println("-----------------------");
+		System.out.println(pMap);
+		System.out.println("-----------------------");
+		
+		model.addAttribute("pMap",pMap);
+		
+		return "board/list3";
+	}
+	
+	
+
+	
+	
+	
+	
+	
 	//글쓰기폼
 	@RequestMapping(value="/wform", method= {RequestMethod.GET, RequestMethod.POST})
 	public String writeForm() {

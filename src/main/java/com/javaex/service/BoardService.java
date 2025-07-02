@@ -158,6 +158,95 @@ public class BoardService {
 		
 		
 		
+		//--게시판 전체 리스트3(페이징+검색)
+		public Map<String, Object> exeList3(int crtPage, String kwd) {
+			System.out.println("BoardService.exeList333");	//ㅇㅋ
+			System.out.println(crtPage);
+			
+	
+			System.out.println(crtPage);
+			System.out.println(kwd);
+			
+			
+			///리스트가져오기///
+			// 한페이지 출력갯수
+			int lsitCnt = 10;
+			
+			//시작번호
+			/*
+			 1--> (0, 10)
+		     2--> (10, 10)
+		     startRowNo = (crtpage -1)*listCnt 
+			 */
+			int startRowNo = (crtPage -1)*lsitCnt;
+			
+			
+			//두개의 데이터를 묶는다가 --> Map사용
+			Map<String, Object> limitMap = new HashMap<String, Object>();
+			limitMap.put("startRowNo", startRowNo);
+			limitMap.put("lsitCnt", lsitCnt);
+			limitMap.put("kwd", kwd);
+			
+			
+			//묶은 걸 레파지토리에 보낸다.
+			List<BoardVO> boardList = boardRepository.boardSelect3(limitMap);
+		
+			
+			/////////////////////////////////////////////
+			//// 페이징버튼 (하단버튼)
+			/////////////////////////////////////////////
+			
+			//페이지당 버튼갯수
+			int pgaeBtncount = 5;
+			
+	
+			//마지막번호버튼                                    //실수로 바꿔준다. 왜? 소수점이 나와야 올림을 할 수 있으니가.
+			int endPageBtnNo = ((int)Math.ceil(crtPage/((double)pgaeBtncount)))*pgaeBtncount;
+			
+			//시작버튼번호		
+			int startPageBtnNo = (endPageBtnNo - pgaeBtncount)+1;
+
+			//전체 글 갯수
+			int totalCount = boardRepository.selectTotalCountByKwd(kwd);
+			
+			//다음 화상표 유무 next
+			boolean next = false;
+			if(lsitCnt*endPageBtnNo < totalCount) {
+				next=true;
+			}else {//다음화살표가 false일때 마지막 버튼 번호를 다시 계산해야한다
+				
+				endPageBtnNo = (int)Math.ceil(totalCount/((double)lsitCnt));    
+			}
+			
+			
+			//이전 화살표 유무 prev
+			boolean prev = false;
+			if(startPageBtnNo != 1) {
+				prev =true;
+			}
+			
+			//모두 묶어서 컨트롤러에 리턴해준다. --> Map 사용
+			Map<String, Object>pMap = new HashMap<String, Object>();
+			pMap.put("boardList", boardList); //리스트
+			pMap.put("prev", prev); //이전버튼 유무
+			pMap.put("next", next); //다음버튼 유무
+			pMap.put("startPageBtnNo", startPageBtnNo); //시작버튼 번호
+			pMap.put("endPageBtnNo", endPageBtnNo); //마지막버튼 번호
+			//pMap.put("pgaeBtncount", pgaeBtncount); //한페이지 노출되는 번호
+			
+			return pMap;
+
+		}
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	
 	

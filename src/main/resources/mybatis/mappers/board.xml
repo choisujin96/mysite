@@ -37,6 +37,39 @@
 			limit #{startRowNo}, #{lsitCnt}
 		]]>
 	</select>
+	
+
+
+
+
+	<!-- 전체리스트3(페이징+검색) -->
+	<select id="selectList3" parameterType="map" resultType="com.javaex.vo.BoardVO">
+		<![CDATA[
+			select  b.no,
+					b.title,
+		            b.content,
+		            b.hit,
+		            date_format(b.reg_date, "%Y-%m-%d" ) regDate,
+		            u.no userNo,
+		            u.name userName
+			from users u, board b
+			where u.no = b.user_no
+		 ]]> 
+	    
+
+	    <if test="kwd != null">
+	    	and title like concat('%', #{kwd}, '%')
+	    </if>
+
+	    <![CDATA[
+			order by b.no asc
+			limit #{startRowNo}, #{lsitCnt}
+		]]>
+		
+	</select>
+
+
+
 
 	<!-- 전체글 갯수 구하기(페이징) -->
 	<select id="selectTotalCount" resultType="int">
@@ -49,6 +82,16 @@
 
 
 
+
+	<!-- 전체글 갯수 구하기(페이징+검색) -->
+	<select id="selectTotalCountByKwd" resultType="int">
+		<![CDATA[
+			select count(*) count
+			from board
+			where title like concat('%', #{kwd}, '%')
+		]]>
+	
+	</select>
 
 
 </mapper>
