@@ -35,11 +35,7 @@ public class GuestbookService {
 	}
 	
 	
-	
-	
-	
-	
-	
+
 	
 
 	//방명록 저장하기

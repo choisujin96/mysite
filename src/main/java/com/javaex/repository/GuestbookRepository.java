@@ -72,4 +72,11 @@ public class GuestbookRepository {
 			
 			return 0;
 		}
+		
+		
+		//아이디사용유무 체크 (회원가입)
+		public void userSelectById() {
+			System.out.println();
+		}
+		
 }
