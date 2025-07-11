@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
     	<!-- js -->
     	<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-3.7.1.js"></script>
-    
+        <!-- jquery문을 읽기 위해 연결. $나 해당문법들이 다 이걸 통해 읽을 수 있음 -->
     
     </head>
 
