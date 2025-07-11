@@ -31,15 +31,7 @@
 	</select>
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	<!-- 방명록 저장하기 -->
 	<insert id="insert" parameterType="com.javaex.vo.GuestbookVO">
@@ -50,6 +42,58 @@
 		]]>
 		
 	</insert>
+
+
+
+
+	<!-- 방명록 저장_키값 가져오기 -->
+	<insert id="insertkey">
+		
+		<![CDATA[	
+	    insert into guestbook
+           values ( null, #{name }, #{password }, #{content }, now() )
+    	]]>
+	
+		<selectKey keyProperty="no" resultType="int" order="AFTER">	
+		     <![CDATA[
+				select last_insert_id()
+	         ]]>        
+		</selectKey>
+
+	</insert>
+
+
+
+	<!-- 글 1개 가져오기 -->
+	<select id="selectOne" parameterType = "int" resultType="com.javaex.vo.GuestbookVO">
+		<![CDATA[	
+		
+			select	no,
+					name,
+                	content,
+                	reg_date regDate 
+		    from guestbook
+		    where no = #{no}
+				
+		]]>
+	
+	
+	
+	
+	</select>
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
 
 
 	<!-- 방명록 삭제 -->
@@ -64,6 +108,11 @@
 		]]>	
 		
 	</delete>
+
+
+
+
+
 
 
 

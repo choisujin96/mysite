@@ -64,13 +64,48 @@ public class GuestbookRepository {
 		}
 		
 		
+		
+		
+		
+		//방명록 저장하고 키값 가져오기(ajax)
+		public int guestbookInsertKey(GuestbookVO guestbookVO) {
+
+			System.out.println("GuestbookRepository.guestbookInsertKey");
+			System.out.println(guestbookVO); //3개
+			
+			int count = sqlSession.insert("guestbook.insertkey", guestbookVO);
+			System.out.println(guestbookVO);// no값 추가됨
+			
+			System.out.println(count);
+			
+			return guestbookVO.getNo();
+		}
+		
+		
+		//글 1개 가져오기
+		public GuestbookVO guestbookSelectOne(int no) {
+			
+			//System.out.println("GuestbookRepository.guestbookSelectOne");
+			//System.out.println(no);
+			
+			//가져온 글 출력
+			GuestbookVO guestbookVO = sqlSession.selectOne("guestbook.selectOne", no);
+			System.out.println(guestbookVO);
+			
+			return guestbookVO;
+		}
+		
+		
+		
+		
+		
 		//삭제하기
 		public int guestbookDelete(GuestbookVO guestbookVO) {
 			System.out.println("GuestbookRepository.Delete()");
 			System.out.println(guestbookVO);
 			int count = sqlSession.delete("guestbook.delete", guestbookVO);
 			
-			return 0;
+			return count;
 		}
 		
 		

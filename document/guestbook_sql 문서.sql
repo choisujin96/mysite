@@ -21,7 +21,8 @@ create table guestbook(
                 password,
                 content,
                 date_format(reg_date, "%Y-%m-%d") regDate 
-    from guestbook;
+    from guestbook
+    where no = 20;
     
     
     
