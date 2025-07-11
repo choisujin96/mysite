@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVO;
@@ -159,6 +161,29 @@ public class UserController {
 		
 	}
 	
+	//아이디사용유무 체크 (회원가입) --> 데이터만 응답
+	@ResponseBody
+	@RequestMapping(value="/idcheck", method= {RequestMethod.GET, RequestMethod.POST})
+	public String idcheck(@RequestParam(value="id") String id, Model model) {
+		System.out.println("UserController.idcheck");//ㅇㅋ
+		
+		boolean isUse = userService.exeIdcheck(id);
+		System.out.println(isUse);
+	
+		//기존방식
+		//모델에 담으면 jsp에서 꺼내서 jsp를 가지고 공싱 응답문서를 만든다
+		//model.addAttribute("isUse", isUse); //jsp에 전달의미 지금은 아니다.
+		
+		//데이터(json형식)만 보내준다 (html없음)
+		//json형식 {'isUse': 'true'}
+		String result = "{\"isUse\": "+isUse+"}";
+		//@ResponseBody 상단에 붙이고 데이터는 return으로 보낸다
+		
+		//jsp로 보내면 X  response 바디에 글자만 보내야한다
+		return result;
+		
+		
+	}
 	
 	
 }

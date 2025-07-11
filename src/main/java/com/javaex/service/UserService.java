@@ -59,4 +59,23 @@ public class UserService {
 		return count;
 	}
 	
+	//아이디사용유무 체크 (회원가입)
+	public boolean exeIdcheck(String id) {
+		System.out.println("UserService.exeIdcheck");//ㅇㅋ
+	
+		UserVO userVO = userRepository.userSelectById(id);
+		System.out.println("service");
+		System.out.println(userVO);
+		
+		if(userVO == null) {
+			//사용할 수 있는 아이디
+			return true;
+		}else {
+			//사용중인 아이디
+			return false;
+		}
+		
+	}
+	
+	
 }

@@ -8,9 +8,18 @@
     <head>
         <meta charset="UTF-8">
         <title>MySite</title>
-        <link rel="stylesheet" href="../../assets/css/reset.css">
-        <link rel="stylesheet" href="../../assets/css/mysite.css">
-        <link rel="stylesheet" href="../../assets/css/user.css">
+        
+        <!-- css -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mysite.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user.css">
+        
+        <!-- js -->
+        
+        <script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-3.7.1.js"></script>
+        
+        
+        
     </head>
 
     <body>
@@ -51,7 +60,10 @@
                             <div class="info-row">
                                 <label class="info-title" for="txt-idcheck">아이디</label>
                                 <input id="txt-idcheck" type="text" name="id" value="">
-                                <button id="" class="btn btn-gray btn-input"  type="button">중복체크</button>
+                                <button id="btnCheck" class="btn btn-gray btn-input"  type="button">중복체크</button>
+                                <p id="checkMsg">ㅇㄴㅇㄴㅇㅇㄴ</p>
+                                
+                             
                             </div>
                             <div class="info-row">
                                 <label class="info-title" for="txt-pwd">패스워드</label>
@@ -91,6 +103,66 @@
 			<!-- 푸터 -->
 
         </div>
+ <!-- -----------------------------------------------------------------------------------------  -->   
+<script>
+//돔이 완료되었을 때
+$(document).ready(function(){
+	console.log('돔트리오ㅘㄴ료');
+	
+	//아이디체크 버튼을 클릭했을 때
+	console.log($('#btnCheck'))
+	$('#btnCheck').on('click',function(){
+		console.log('아이디체크 버튼 클릭');
+		
+		//입력한 아이디
+		let id = $('#txt-idcheck').val();
+		console.log(id);
+		
+		//*서버랑 통신(주소치고 엔터)-->데이터만 받을거야*/
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath }/user/idcheck",		
+			type : "post",
+			//contentType : "application/json",
+			data : {id: id}, //꼬랑지 없으면 안써도 됨
+
+			dataType : "json",  // 서버에서 JSON 형식의 데이터를 받겠다는 뜻
+			success : function(result){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(result);
+				console.log(result.isUse);
+				
+				if(result.isUse == true){
+					$('#checkMsg').text('사용 가능한 아이디입니다.');
+					$('#checkMsg').css('color', '#0000ff');
+					$('#checkMsg').css('font-weight', 'bold'); 
+				}else{
+					$('#checkMsg').text('이미 사용 중인 아이디입니다.');
+					$('#checkMsg').css('color', '#ff0000');
+					$('#checkMsg').css('font-weight', 'bold');
+				}
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+
+		
+		
+	});
+	
+	
+	
+});
+	
+	
+	
+	
+
+
+</script>
+     
      
     </body>
 </html>
