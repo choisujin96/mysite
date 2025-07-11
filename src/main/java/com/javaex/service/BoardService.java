@@ -173,11 +173,6 @@ public class BoardService {
 			int lsitCnt = 10;
 			
 			//시작번호
-			/*
-			 1--> (0, 10)
-		     2--> (10, 10)
-		     startRowNo = (crtpage -1)*listCnt 
-			 */
 			int startRowNo = (crtPage -1)*lsitCnt;
 			
 			
@@ -238,17 +233,7 @@ public class BoardService {
 
 		}
 			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
+
 	
 	//글등록
 	public int exeBoardAdd() {

@@ -96,6 +96,8 @@ public class BoardController {
 		
 	}
 	
+	
+	
 	//세션에 있는 값을 잘 ㅅㅏ용해라!!
 	//글등록(작성자 번호)
 	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
@@ -105,6 +107,10 @@ public class BoardController {
 		
 		return null;
 	}
+	
+	
+	
+	
 	
 	//수정폼
 	

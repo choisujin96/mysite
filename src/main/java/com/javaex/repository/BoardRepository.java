@@ -81,10 +81,6 @@ public class BoardRepository {
 	
 	
 	
-	
-	
-	
-	
 	//글등록
 	public int boardInsert() {
 		
