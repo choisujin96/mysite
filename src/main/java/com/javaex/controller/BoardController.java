@@ -108,12 +108,10 @@ public class BoardController {
 		System.out.println(boardVO);
 		return "redirect:/board/list";
 	
-	
 	}
 	
 	
-	
-	
+
 	
 	//수정폼
 	
