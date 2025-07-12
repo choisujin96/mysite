@@ -40,17 +40,19 @@
                     
                     <div id="board-writeform">
                 
-                        <form class="form-box" action="#" method="get">
+                        <form class="form-box" action="${pageContext.request.contextPath}/board/write" method="get">
 							<!-- 제목 -->
 							<div class="info-row">
 								<label class="info-title" for="txt-title">제&nbsp;&nbsp;&nbsp;목</label>
-								<input type="text" id="txt-title" name="" value="" placeholder="제목을 입력해 주세요">
+								<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
 							</div>
 						
 							<!-- 내용 -->
 							<div class="info-row">
-								<textarea id="txt-content"></textarea>
+								<textarea id="txt-content" name="content" value=""></textarea>
 							</div>
+								<input type="hidden" name="userNo" value="${authUser.no}">
+								
 							
                             <div class="btn-box">
 							    <a class="btn btn-gray btn-md" href="">목록</a>

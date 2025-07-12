@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.exeList();
 		model.addAttribute("boardList", boardList);
 
-		return "/board/list";
+		return "board/list";
 		
 	} 
 	
@@ -101,11 +102,13 @@ public class BoardController {
 	//세션에 있는 값을 잘 ㅅㅏ용해라!!
 	//글등록(작성자 번호)
 	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
-	public String write() {
+	public String write(@ModelAttribute BoardVO boardVO) {
 		System.out.println("BoardController.write");//ㅇㅋ
-		boardService.exeBoardAdd();
-		
-		return null;
+		boardService.exeBoardAdd(boardVO);
+		System.out.println(boardVO);
+		return "redirect:/board/list";
+	
+	
 	}
 	
 	

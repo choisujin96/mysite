@@ -236,11 +236,12 @@ public class BoardService {
 
 	
 	//글등록
-	public int exeBoardAdd() {
+	public int exeBoardAdd(BoardVO boardVO) {
 		System.out.println("BoardService.exeBoardAdd");//ㅇㅋ
-		boardRepository.boardInsert();
+		int count = boardRepository.boardInsert(boardVO);
+		//System.out.println(boardVO);
 		
-		return 0;
+		return count;
 		
 		
 	}

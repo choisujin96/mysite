@@ -78,14 +78,14 @@ public class BoardRepository {
 	}
 	
 	
-	
-	
-	
+
 	//글등록
-	public int boardInsert() {
+	public int boardInsert(BoardVO boardVO) {
 		
 		System.out.println("BoardRepository.boardInsert");//ㅇㅋ
-		return 0;
+		int count = sqlSession.insert("board.insert", boardVO);
+		//System.out.println(boardVO);
+		return count;
 	}
 	
 }

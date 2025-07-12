@@ -94,4 +94,12 @@
 	</select>
 
 
+	<!-- 글 등록 -->
+	<insert id="insert" parameterType="com.javaex.vo.BoardVO">
+		<![CDATA[
+			insert into board 
+			values(null, #{userNo}, #{title}, #{content}, #{hit}, now());
+		]]>
+	</insert>
+
 </mapper>
