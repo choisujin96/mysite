@@ -4,16 +4,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.javaex.service.GuestbookService;
+import com.javaex.util.JsonResult;
 import com.javaex.vo.GuestbookVO;
 
 //데이터로 응답하는 애들
-@Controller
+@RestController  // 컨트롤러 + 
 public class GuestbookApiController {
 	
 	
@@ -25,24 +31,31 @@ public class GuestbookApiController {
 	
 	//메소드
 	//--전체리스트
-	@ResponseBody //json으로 바꿔줌
-	@RequestMapping(value="/api/guestbook/list", method= {RequestMethod.GET, RequestMethod.POST})
-	public List<GuestbookVO> list() {
+	//@ResponseBody //json으로 바꿔줌
+	@GetMapping("/api/guestbooks")
+//	@GetMapping(value="/api/guestbooks")  --> 밸류값이 오는 건 당여하니 value빼서 써도 됨
+//	@RequestMapping(value="/api/guestbooks", method= RequestMethod.GET)
+	public JsonResult list() {
 		
 		System.out.println("GuestbookApiController.list");
 		
 		List<GuestbookVO> guestbookList =  guestbookService.exeGetguestbookList();
 		System.out.println(guestbookList);
 		
-		return guestbookList;
-			
+		if(guestbookList != null) {
+			return JsonResult.success(guestbookList);
+		}else {
+			return JsonResult.fail("알 수 없는 오류");
+		}
+
 	}
 	
 	
 	//--방명록 저장(키값용도 이거 쓰면 됨/)
-	@ResponseBody
-	@RequestMapping(value="/api/guestbook/add", method= {RequestMethod.GET, RequestMethod.POST})
-	public GuestbookVO add(@ModelAttribute GuestbookVO guestbookVO) {
+	//@ResponseBody
+	@PostMapping(value="/api/guestbooks")
+	//@RequestMapping(value="/api/guestbooks", method= RequestMethod.POST)
+	public JsonResult add(@ModelAttribute GuestbookVO guestbookVO) {
 		
 		//System.out.println("GuestbookApiController.add");
 		//System.out.println(guestbookVO);
@@ -50,21 +63,37 @@ public class GuestbookApiController {
 		//guestbookVO(3개 값)  --> gVO(4, 출력용)
 		GuestbookVO gVO = guestbookService.exeGuestbookAddKey(guestbookVO);
 		
-		return gVO;
-		
+		if(gVO != null) {
+			return JsonResult.success(gVO);
+		}else {
+			return JsonResult.fail("저장에 실패");
+		}
 	}
 	
 
 	//방명록 삭제
-	@ResponseBody //json으로 바뀜
-	@RequestMapping(value="/api/guestbook/remove", method= {RequestMethod.GET, RequestMethod.POST})
-	public int remove(@ModelAttribute GuestbookVO guestbookVO) {
+	//@ResponseBody //json으로 바뀜
+	@DeleteMapping(value="/api/guestbooks/{no}")
+	//@RequestMapping(value="/api/guestbooks/{no}", method= RequestMethod.DELETE)
+	public JsonResult remove(@ModelAttribute GuestbookVO guestbookVO,
+					  @PathVariable(value="no") int no
+			) {
 		System.out.println("GuestbookApiController.remove");
-		System.out.println(guestbookVO);
 		
+		//guestbookVO에는 패스워드 값만 있다
+		System.out.println(guestbookVO);
+		System.out.println("패스밸리어블로 받은 값: " + no);
+		
+		//guestbookVO에 no값을 넣어준다
+		guestbookVO.setNo(no);
+		System.out.println(guestbookVO);
 		int count = guestbookService.exeGuestbookRemove(guestbookVO);
 		
-		return count;
+		if(count == 1) {
+			return JsonResult.success(count);	
+		}else {
+			return JsonResult.fail("패스워드 틀림");
+		}
 		
 	}
 }

@@ -28,18 +28,15 @@
 	        <!-- 헤더 + 네비---------------------------------- -->
 		
             <div class="content2 clearfix">
-                <aside>
-                    <h2>방명록</h2>
-                    <ul>
-                        <li><a href="">일반방명록</a></li>
-                        <li><a href="">ajax방명록</a></li>
-                    </ul>
-                </aside>
-
+            
+ 	        <!-- 방명록 aside -->
+		   <c:import url="/WEB-INF/views/include/asideGuestbook.jsp"></c:import>
+	       <!-- 방명록 aside -->
+		   
 				<main>
 					
 				    <div class="main-head clearfix">
-                        <h3>일반방명록</h3>
+                        <h3>ajax방명록</h3>
                         <ol class="clearfix">
                             <li>홈</li>
                             <li>방명록</li>
@@ -205,24 +202,34 @@
 			$.ajax({
 				
 				//보낼 때
-				url : '${pageContext.request.contextPath }/api/guestbook/add',		
+				url : '${pageContext.request.contextPath }/api/guestbooks',
 				type : "post",
 				//contentType : "application/json",
 				data :guestbookVO,
 
 				//받을 때
 				dataType : 'json',
-				success : function(guestbookVO){
+				success : function(jsonResult){
 					/*성공시 처리해야될 코드 작성*/
+					console.log(jsonResult);
+					console.log(jsonResult.result);
+					console.log(jsonResult.apiData);
+
 					
-					/*화면에 그리기*/
-					console.log(guestbookVO);
-					render(guestbookVO, 'down');
+					if(jsonResult.reulst == 'success'){
+						/*화면에 그리기*/
+						render(jsonResult.apiData, 'up');
+						
+						/*입력폼 비우기*/
+						$('#txt-name').val('');
+						$('#txt-password').val('');
+						$('#text-content').val('');
+					}else{
+						console.log("등록 실패");
+					}
 					
-					/*입력폼 비우기*/
-					$('#txt-name').val('');
-					$('#txt-password').val('');
-					$('#text-content').val('');
+					
+			
 					
 					
 				},
@@ -280,7 +287,6 @@
    			let no = $('#modalForm input[name="no"]').val();
    			
    			let guestbookVO = {
-   				no: no,
    				password: pw
    			};
 			
@@ -290,24 +296,24 @@
 			//전송
 			$.ajax({
 				
-				url : '${pageContext.request.contextPath }/api/guestbook/remove',		
-				type : 'post',
+				url : '${pageContext.request.contextPath }/api/guestbooks/'+no,		
+				type : 'delete',
 				//contentType : 'application/json',
 				data : guestbookVO,
 
 				dataType : 'json',
-				success : function(result){
+				success : function(JsonResult){
 					/*성공시 처리해야될 코드 작성*/
-					console.log(result);
+					console.log(JsonResult);
+					console.log(JsonResult.result);
 					
-					if(result == 1){
+					if(JsonResult == 'success'){
 						//리스트에서 선택한 거 화면에서 지우기	
 						$('#t' + no).remove();//아이디를 매칭시킨다.
-						
-						
+						$('.modal-bg').removeClass('active');	
 					}
 					//모달창 닫기
-					$('.modal-bg').removeClass('active');
+					$('.modal-bg').removeClass('active');	
 					
 				},
 				error : function(XHR, status, error) {
@@ -324,26 +330,35 @@
 		
 		
    }); 
-   
+   //리스트데이터 요청해서 그리는 함수
    function fetchList(){
 	   
 	   $.ajax({
 			
-			url : "${pageContext.request.contextPath }/api/guestbook/list",		
-			type : "post",
+			url : "${pageContext.request.contextPath }/api/guestbooks",
+			/*남의 것 쓸 때 --> url : 'https://raw.githubusercontent.com/clz2025-red/api/refs/heads/main/guestbook',*/
+			type : "get",
 			//contentType : "application/json",
-			//data : {name: ”홍길동"}, 지금은 꼬랑지(list?id=ddd) 없으니 필요없음
+			//data : {name: "홍길동"}, 지금은 꼬랑지(list?id=ddd) 없으니 필요없음
 
 			dataType : "json",
-			success : function(guestbookList){
+			success : function(jsonResult){
 				/*성공시 처리해야될 코드 작성*/
-				//console.log(result);
+				console.log(jsonResult);
+				console.log(jsonResult.result); //success인지 fail인지
+				console.log(jsonResult.apiData); //success면 데이터값을 알려준다
 				
-				//화면에 그린다.
-				for(let i=0; i<guestbookList.length; i++){
-					render(guestbookList[i], 'up');	
-					
+				
+				if(jsonResult.result == 'success'){
+					//화면에 그린다.
+					for(let i=0; i<jsonResult.apiData.length; i++){
+						render(jsonResult.apiData[i], 'down');	
+					}					
+				}else {
+					console.log("알 수 없는 오류");
 				}
+				
+			
 				
 			},
 			error : function(XHR, status, error) {
@@ -369,7 +384,7 @@ function render(guestbookVO, updown){
 	str += '	<tbody>';
 	str += '		<tr>';
 	str += '			<td>' + guestbookVO.no + '</td>';
-	str += '			<td>' + guestbookVOw.name + '</td>';
+	str += '			<td>' + guestbookVO.name + '</td>';
 	str += '			<td>' + guestbookVO.regDate + '</td>';
 	str += '			<td class="txt-center">';
 	
