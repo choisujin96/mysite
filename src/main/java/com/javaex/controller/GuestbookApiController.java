@@ -28,7 +28,6 @@ public class GuestbookApiController {
 	private GuestbookService guestbookService;
 	
 	
-	
 	//메소드
 	//--전체리스트
 	//@ResponseBody //json으로 바꿔줌

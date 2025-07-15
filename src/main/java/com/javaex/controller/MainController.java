@@ -23,7 +23,7 @@ public class MainController {
 		return "main/index";
 	}
 	
-	
+	/*
 	//--사이트 시작 페이지
 	@RequestMapping(value="/{id}/{no}", method= {RequestMethod.GET, RequestMethod.POST})
 	public String index2(@PathVariable(value="id") String id,
@@ -36,7 +36,7 @@ public class MainController {
 		return "main/index";
 	}
 	
-	
+	*/
 	
 	
 }

@@ -202,11 +202,11 @@
 			$.ajax({
 				
 				//보낼 때
-				url : '${pageContext.request.contextPath }/api/guestbooks',
-				type : "post",
+				url : '${pageContext.request.contextPath }/api/guestbooks',		
+				type : 'post',
 				//contentType : "application/json",
-				data :guestbookVO,
-
+				data : guestbookVO,
+				
 				//받을 때
 				dataType : 'json',
 				success : function(jsonResult){
@@ -214,24 +214,21 @@
 					console.log(jsonResult);
 					console.log(jsonResult.result);
 					console.log(jsonResult.apiData);
-
 					
-					if(jsonResult.reulst == 'success'){
-						/*화면에 그리기*/
+					if(jsonResult.result == 'success'){
+						
+						/* 화면에 그리기 */
 						render(jsonResult.apiData, 'up');
 						
-						/*입력폼 비우기*/
+						/* 입력폼 비우기 */
 						$('#txt-name').val('');
 						$('#txt-password').val('');
-						$('#text-content').val('');
-					}else{
+						$('#text-content').val('')
+					}else {
 						console.log("등록 실패");
 					}
 					
-					
-			
-					
-					
+				
 				},
 				error : function(XHR, status, error) {
 					console.error(status + " : " + error);

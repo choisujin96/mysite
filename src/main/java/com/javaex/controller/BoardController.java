@@ -115,9 +115,14 @@ public class BoardController {
 	
 	//수정폼
 	
+	
 	//수정
 	
+	
+	
 	//삭제
+	
+	
 	
 
 }
