@@ -23,4 +23,26 @@ create table gallery(
  references users (no)
 );
 
+-- 전체조회
+select *
+from gallery
+;
 
+-- 전체조회
+select   g.no,
+			u.no userNo,
+            u.name userName,
+            g.content,
+            g.filepath,
+            g.orgName,
+            g.saveName,
+            g.fileSize
+from users u , gallery g
+where u.no = g.user_no
+;
+
+select *
+from users;
+
+insert into gallery 
+value(null, '1', '안녕','C:\javaStudy\upload', 'soojin', 'ss', 1235);

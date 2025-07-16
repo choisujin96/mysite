@@ -3,14 +3,17 @@
 <mapper namespace="gallery">
 
 	<!-- 전체리스트 -->
-	<select id="selectList" resultType="com.javaex.vo.GalleryVOs">
+	<select id="selectList" resultType="com.javaex.vo.GalleryVO">
 		<![CDATA[
-		
-			
-		
-		
-		
-		
+			select  g.no,
+					u.no userNo,
+		            g.content,
+		            g.filepath,
+		            g.orgName,
+		            g.saveName,
+		            g.fileSize	
+			from users u , gallery g
+			where u.no = g.user_no
 		]]>
 	
 	

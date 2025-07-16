@@ -1,14 +1,32 @@
 package com.javaex.repository;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.javaex.vo.GalleryVO;
 
 @Repository
 public class GalleryRepository {
 
+	@Autowired
+	private SqlSession sqlSession;
+	
+	public List<GalleryVO> SelectList() {
+		System.out.println("GalleryRepository.SelectList");	
+		List<GalleryVO> galleryList = sqlSession.selectList("gallery.selectList");	
+		System.out.println(galleryList);
+		
+		return galleryList;
+	}
 	
 	
-	public void SelectList() {
-	System.out.println("GalleryRepository.SelectList");	
+	public void galleryupload() {
+		System.out.println("GalleryRepository.galleryupload");//ㅇㅋ
 		
 	}
+	
+	
 }
