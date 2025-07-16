@@ -15,9 +15,15 @@
 			from users u , gallery g
 			where u.no = g.user_no
 		]]>
-	
-	
 	</select>
+	
+	<!-- 업로드 -->
+	<insert id="insert" parameterType="com.javaex.vo.GalleryVO">
+		<![CDATA[
+			insert into gallery 
+			value(null, #{userNo}, #{content}, #{filepath}, #{orgName}, #{saveName}, #{fileSize});	
+		]]>
+	</insert>
 
 
 

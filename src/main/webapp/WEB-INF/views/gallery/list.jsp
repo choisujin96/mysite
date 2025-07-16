@@ -198,29 +198,29 @@ $(document).ready(function(){
 		//모달창 열기
 		$('#modal-upload').addClass('active');
 		
-		//등록번튼 클릭했을 때
+		//등록버튼 클릭했을 때
 		$('.btn-upload').on('click', function(event){
 			console.log('등록버튼 클릭');
 			event.preventDefault();
 			
-			
 			//value값 수집
 			let content = $('#txt-content').val();
-			let file = $('#txt-file').val();
-			
-			//VO묶기
-			let guestbookVO = {
-				content: content
-				file: file
-			};
-			
-			console.log(guestbookVO);
-			
-			
+		    let file = $('#txt-file')[0].files[0]; // ← 파일 객체!
+		
+		    // 확인용
+		    console.log("작성 내용:", content);
+		    console.log("선택된 파일:", file);
+		
+		    // VO처럼 묶기 (주의: JS 객체는 실제 파일 업로드용이 아님)
+		    let guestbookVO = {
+		        content: content,
+		        file: file.name  //파일 이름만 예시로 넣음 (파일 자체는 FormData로 보내야 함)
+		    };
+		
+		    console.log(guestbookVO);
 		});
 		
-		
-		
+				
 		//모달창의 닫기버튼을 클릭했을 때
 		$('.btn-close').on('click', function(){
 			console.log('모달창의 닫기버튼 클릭');

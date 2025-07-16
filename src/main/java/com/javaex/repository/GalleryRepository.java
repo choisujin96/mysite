@@ -17,15 +17,16 @@ public class GalleryRepository {
 	public List<GalleryVO> SelectList() {
 		System.out.println("GalleryRepository.SelectList");	
 		List<GalleryVO> galleryList = sqlSession.selectList("gallery.selectList");	
-		System.out.println(galleryList);
 		
 		return galleryList;
 	}
 	
 	
-	public void galleryupload() {
+	//업로드
+	public void galleryupload(GalleryVO galleryVO) {
 		System.out.println("GalleryRepository.galleryupload");//ㅇㅋ
-		
+		 int count = sqlSession.insert("gallery.insert", galleryVO);
+		System.out.println(galleryVO);
 	}
 	
 	
