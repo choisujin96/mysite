@@ -6,9 +6,10 @@
 	<select id="selectList" resultType="com.javaex.vo.GalleryVO">
 		<![CDATA[
 			select  g.no,
-					u.no userNo,
+					g.user_no as userNo,
+        			u.name as userName,
 		            g.content,
-		            g.filepath,
+		            g.filepath as filePath,
 		            g.orgName,
 		            g.saveName,
 		            g.fileSize	
