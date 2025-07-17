@@ -9,7 +9,7 @@ public class GalleryVO {
 	private String saveName;
 	private String filePath;
 	private long fileSize;
-	private String userNo;
+	private int userNo;
 	private String userName;
 	
 	
@@ -20,7 +20,7 @@ public class GalleryVO {
 
 
 	public GalleryVO(int no, String content, String orgName, String saveName, String filePath, long fileSize, 
-		   String userNo, String userName) {
+			int userNo, String userName) {
 		super();
 		this.no = no;
 		this.content = content;
@@ -85,12 +85,12 @@ public class GalleryVO {
 	}
 
 
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
 
 
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 	

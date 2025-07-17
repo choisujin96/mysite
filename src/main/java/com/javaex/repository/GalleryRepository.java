@@ -1,10 +1,13 @@
 package com.javaex.repository;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.vo.GalleryVO;
 
@@ -23,11 +26,17 @@ public class GalleryRepository {
 	
 	
 	//업로드
-	public void galleryupload(GalleryVO galleryVO) {
+	public int galleryupload(GalleryVO galleryVO, MultipartFile file) {
 		System.out.println("GalleryRepository.galleryupload");//ㅇㅋ
-		 int count = sqlSession.insert("gallery.insert", galleryVO);
-		System.out.println(galleryVO);
-	}
+		 System.out.println("GalleryRepository.galleryupload");
+		    System.out.println("sqlSession : " + sqlSession);
+
+		    int count = sqlSession.insert("gallery.insert", galleryVO);
+		    System.out.println("insert count: " + count);
+
+		    return count;
 	
+	}
+		
 	
 }

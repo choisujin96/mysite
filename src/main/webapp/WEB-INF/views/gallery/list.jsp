@@ -56,54 +56,17 @@
 		                <ul class="clearfix">
 		
 						<!-- 이미지반복영역 -->
-		                <li>
-		                    <div class="card" >
-		                        <img src="${pageContext.request.contextPath}/upload/aaa.jpg">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
-		                <li>
-		                    <div class="card" >
-		                        <img src="">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
-		                <li>
-		                    <div class="card" >
-		                        <img src="">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
-		                <li>
-		                    <div class="card" >
-		                        <img src="">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
-		                 <li>
-		                    <div class="card" >
-		                        <img src="">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
-		                  <li>
-		                    <div class="card" >
-		                        <img src="">
-		                        <div class="writer">
-		                            작성자: <strong>유재석</strong>
-		                        </div>
-		                    </div>
-		                </li>
+						<c:forEach var="galleryVO" items="${galleryList}">
+			                <li>
+			                    <div class="card" >
+			                        <img src="${pageContext.request.contextPath}/upload/${galleryVO.saveName}">
+			                        <div class="writer">
+			                            작성자: <strong>${galleryVO.userName}</strong>
+			                        </div>
+			                    </div>
+			                </li>
+		                </c:forEach>
+			        
 						<!-- 이미지반복영역 -->
 					
 						</ul>
@@ -198,10 +161,13 @@ $(document).ready(function(){
 		//모달창 열기
 		$('#modal-upload').addClass('active');
 		
+	 });
+	
+	
 		//등록버튼 클릭했을 때
 		$('.btn-upload').on('click', function(event){
 			console.log('등록버튼 클릭');
-			event.preventDefault();
+			//event.preventDefault();
 			
 			//value값 수집
 			let content = $('#txt-content').val();
@@ -228,11 +194,34 @@ $(document).ready(function(){
 			$('.modal-bg').removeClass('active');
 				
 		});
+		
+		
+		// 이미지 클릭 시 모달 오픈
+	    $(document).on('click', '.card', function(){
+	        let imgSrc = $(this).data('img');
+	        let content = $(this).data('content');
+
+	     
+
+	        // 모달에 데이터 삽입
+	        $('#modal-view img').attr('src', imgSrc);
+	        $('#modal-view .img-content').text(content);
+
+	        // 모달창 활성화
+	        $('#modal-view').addClass('active');
+	    });
+
+	    // 모달 닫기
+	    $('.btn-close').on('click', function(){
+	        $('.modal-bg').removeClass('active');
+	    });
+		
+		
+		
 	});	  
 
 
-		
-});
+	
 </script>
 
 	</body>

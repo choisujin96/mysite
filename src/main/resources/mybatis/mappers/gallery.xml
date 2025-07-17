@@ -17,11 +17,12 @@
 		]]>
 	</select>
 	
+	
 	<!-- 업로드 -->
 	<insert id="insert" parameterType="com.javaex.vo.GalleryVO">
 		<![CDATA[
 			insert into gallery 
-			value(null, #{userNo}, #{content}, #{filepath}, #{orgName}, #{saveName}, #{fileSize});	
+			value(null, #{userNo}, #{content}, #{filePath}, #{orgName}, #{saveName}, #{fileSize});	
 		]]>
 	</insert>
 
