@@ -58,7 +58,7 @@
 						<!-- 이미지반복영역 -->
 						<c:forEach var="galleryVO" items="${galleryList}">
 			                <li>
-			                    <div class="card" >
+			                    <div class="card" data-content="${galleryVO.content}">
 			                        <img src="${pageContext.request.contextPath}/upload/${galleryVO.saveName}">
 			                        <div class="writer">
 			                            작성자: <strong>${galleryVO.userName}</strong>
@@ -131,18 +131,18 @@
 		<p class="title">이미지보기 모달창</p>
 		
 		<div id="img-view">
-            <img src="">
+  			<img id="modal-img" src="" alt="미리보기 이미지">
 
 
-            <div class="img-content">
-                여기는 입력한 코멘트가 나옵니다.
-            </div>
-
-            <div class="btn-box">
-			    <button type="submit" class="btn-del btn btn-blue btn-md">삭제</button>
-            </div>
-
+        <div class="img-content">
+            <input type ="text" name="content" autocomplete="off"  value="">
         </div>
+
+        <div class="btn-box">
+    		<button type="submit" class="btn-del btn btn-blue btn-md">삭제</button>
+        </div>
+
+     </div>
 			
 		
 	</div>
@@ -199,16 +199,11 @@ $(document).ready(function(){
 		// 이미지 클릭 시 모달 오픈
 	    $('.card').on('click', function(){
 	    	console.log('이미지 클릭');
-	        let imgSrc = $(this).data('file');
-	        let content = $(this).data('content');
+	    	let imgSrc = $(this).find('img').attr('src');  // 카드 내부 이미지 경로
+	        let content = $(this).data('content') || "";   // data-content 없으면 빈 문자열
 
-	     
-
-	        // 모달에 데이터 삽입
-	        $('#modal-view img').attr('src', imgSrc);
-	        $('#modal-view .img-content').text(content);
-
-	        // 모달창 활성화
+	        $('#modal-img').attr('src', imgSrc);                  // 이미지 경로 설정
+	        $('.img-content input[name="content"]').val(content); // 입력창에 내용 설정
 	        $('#modal-view').addClass('active');
 	    });
 
@@ -216,9 +211,7 @@ $(document).ready(function(){
 	    $('.btn-close').on('click', function(){
 	        $('.modal-bg').removeClass('active');
 	    });
-		
-		
-		
+
 	});	  
 
 
