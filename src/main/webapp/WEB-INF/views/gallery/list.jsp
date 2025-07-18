@@ -197,8 +197,9 @@ $(document).ready(function(){
 		
 		
 		// 이미지 클릭 시 모달 오픈
-	    $(document).on('click', '.card', function(){
-	        let imgSrc = $(this).data('img');
+	    $('.card').on('click', function(){
+	    	console.log('이미지 클릭');
+	        let imgSrc = $(this).data('file');
 	        let content = $(this).data('content');
 
 	     
