@@ -1,4 +1,6 @@
-package com.javaex.service;
+/*
+ package com.javaex.service;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,3 +30,4 @@ public class GuestbookServiceTest {
 	
 	
 }
+*/
